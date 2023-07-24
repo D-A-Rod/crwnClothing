@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState} from "react";
 import {
-  createAuthUserWithEmailAndPassword,
+  //createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
   signInWithGooglePopup,
   signInAuthUserWithEmailAndPassword,
@@ -18,6 +18,7 @@ const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
+
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
@@ -26,8 +27,9 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
-      const respose = await signInAuthUserWithEmailAndPassword(email, password);
-      console.log(respose);
+      // const { user } = 
+      await signInAuthUserWithEmailAndPassword(email, password);
+        //await createUserDocumentFromAuth(user, {displayName}); //
       resetFormFields();
     } catch (error) {
       switch (error.code) {
@@ -49,8 +51,8 @@ const SignInForm = () => {
   };
 
   const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
+     await signInWithGooglePopup();
+   
   };
 
   return (
@@ -77,7 +79,7 @@ const SignInForm = () => {
         />
         <div className="buttons-container">
           <Button type="submit">Sign Ip</Button>
-          <Button type='button' buttonType="google" onClick={signInWithGoogle}>
+          <Button type="button" buttonType="google" onClick={signInWithGoogle}>
             Google Sign In
           </Button>
         </div>

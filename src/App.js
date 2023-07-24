@@ -3,15 +3,8 @@ import Navigation from "./routes/navigation/navigation.component";
 import { Routes, Route } from "react-router-dom";
 import "./index.scss";
 import Authentication from "./routes/authentication/authentication.component";
+import Shop from "./routes/shop/shop.component";
 
-const Shop = () => {
-  return (
-    <div>
-      <h1>I am Shop Page</h1>
-      {/* <Outlet /> */}
-    </div>
-  );
-};
 
 const App = () => {
   return (
