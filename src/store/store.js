@@ -1,7 +1,9 @@
 import { compose, applyMiddleware, createStore } from "redux";
 import { logger } from "redux-logger";
 import { rootReducer } from "./root-reducer";
-
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import thunk from "redux-thunk";
 //root reducer
 
 const loggerMiddleware = (store) => (next) => (action) => {
@@ -17,8 +19,28 @@ const loggerMiddleware = (store) => (next) => (action) => {
   console.log("next state: ", store.getState());
 };
 
-const middleWares = [logger];
+const persistConfig = { 
+    key: 'root',
+    storage,
+    blacklist: ['user']
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+
+const middleWares = [process.env.NODE_ENV !== 'production' && logger, thunk].filter(Boolean);
+
+// const thunkMiddleWares = (store) => (next) => (action) =>{
+//     if(typeof(action) === 'function') {
+//         action(dispatch)
+//     }
+// }
+
+
 
 const composedEnhancers = compose(applyMiddleware(...middleWares));
 
-export const store = createStore(rootReducer, undefined, composedEnhancers);
+export const store = createStore(persistedReducer, undefined, composedEnhancers);
+
+
+export const persistor = persistStore(store)
