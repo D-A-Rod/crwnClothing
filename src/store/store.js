@@ -19,16 +19,19 @@ const loggerMiddleware = (store) => (next) => (action) => {
   console.log("next state: ", store.getState());
 };
 
-const persistConfig = { 
-    key: 'root',
-    storage,
-    blacklist: ['user']
-}
+const persistConfig = {
+  key: "root",
+  storage,
+  whiteList: ["cart"],
+  // blacklist: ['user']
+};
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-
-const middleWares = [process.env.NODE_ENV !== 'production' && logger, thunk].filter(Boolean);
+const middleWares = [
+  process.env.NODE_ENV !== "production" && logger,
+  thunk,
+].filter(Boolean);
 
 // const thunkMiddleWares = (store) => (next) => (action) =>{
 //     if(typeof(action) === 'function') {
@@ -36,11 +39,12 @@ const middleWares = [process.env.NODE_ENV !== 'production' && logger, thunk].fil
 //     }
 // }
 
-
-
 const composedEnhancers = compose(applyMiddleware(...middleWares));
 
-export const store = createStore(persistedReducer, undefined, composedEnhancers);
+export const store = createStore(
+  persistedReducer,
+  undefined,
+  composedEnhancers
+);
 
-
-export const persistor = persistStore(store)
+export const persistor = persistStore(store);
