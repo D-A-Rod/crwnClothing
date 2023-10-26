@@ -1,8 +1,8 @@
-// import { loadStripe } from "@stripe/stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
-// export const stripePromise = loadStripe(
-//     process.env.REACT_APP_STRIPE_KEY
-//     );
+export const stripePromise = loadStripe(
+    process.env.REACT_APP_STRIPE_KEY
+    );
 
 
-// console.log("Stripe Promise:", stripePromise);
+console.log("Stripe Promise:", stripePromise);
