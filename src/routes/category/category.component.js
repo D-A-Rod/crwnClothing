@@ -13,7 +13,7 @@ import { fetchCategoriesAsync } from "../../store/categories/category.action";
 const Category = () => {
   const { category } = useParams();
   const categoriesMap = useSelector(selectCategiesMap);
-  const isLoading = useSelector(selectCategoriesIsLoading);
+  // const isLoading = useSelector(selectCategoriesIsLoading);
   const [products, setProducts] = useState(categoriesMap[category]);
   // console.log("render/re-render category component");
 
