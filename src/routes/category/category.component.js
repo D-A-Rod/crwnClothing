@@ -12,20 +12,25 @@ import { fetchCategoriesAsync } from "../../store/categories/category.action";
 
 const Category = () => {
   const { category } = useParams();
+  console.log( "this is category from useParams", category );
   const categoriesMap = useSelector(selectCategiesMap);
+  console.log( "this is categoriesMap", categoriesMap );
   // const isLoading = useSelector(selectCategoriesIsLoading);
   const [products, setProducts] = useState(categoriesMap[category]);
+  console.log( "this is category from useState", category );
   // console.log("render/re-render category component");
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchCategoriesAsync);
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchCategoriesAsync());
+  // }, [dispatch]);
 
   useEffect(() => {
     console.log("effect fired calling setProducts");
     setProducts(categoriesMap[category]);
+    console.log("this is set Products", setProducts());
+    console.log( "this is category from useEffect", category );
   }, [category, categoriesMap]);
 
   return (
