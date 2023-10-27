@@ -31,16 +31,13 @@ const Category = () => {
   return (
     <Fragment>
       <h2 className="category-title">{category.toUpperCase()}</h2>
-      {isLoading ? (
-        <Spinner />
-      ) : (
         <div className="category-container">
           {products &&
             products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
         </div>
-      )}
+      )
     </Fragment>
   );
 };
