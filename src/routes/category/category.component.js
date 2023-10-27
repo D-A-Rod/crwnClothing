@@ -70,7 +70,7 @@ const Category = () => {
   console.log( "this is category from useState", category );
   // console.log("render/re-render category component");
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // useEffect(() => {
   //   dispatch(fetchCategoriesAsync());
@@ -79,8 +79,7 @@ const Category = () => {
   useEffect(() => {
     console.log("effect fired calling setProducts");
     setProducts(categoriesMap[category]);
-    console.log("this is set Products", setProducts);
-    console.log( "this is category from useEffect", category );
+    console.log("this is set Products", setProducts(categoriesMap[category]));
   }, [category, categoriesMap]);
 
   return (
